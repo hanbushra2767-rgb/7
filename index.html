@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Mein Portfolio</title>
+    <style>
+        * {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  font-family:'Inter', sans-serif;
+  background: linear-gradient(-45deg,#f8f6f3,#ece8e1,#f4f1ec,#e9e4dc);
+  background-size:400% 400%;
+  animation:gradientMove 20s ease infinite;
+  color:#2c2c2c;
+  overflow-x:hidden;
+}
+
+@keyframes gradientMove {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* ================= NAVIGATION ================= */
+
+nav {
+  position:fixed;
+  width:100%;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,0,0,0.05);
+  z-index:1000;
+  transition:0.4s;
+}
+
+nav.scrolled {
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.nav-container {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 10%;
+}
+
+.logo {
+  font-family:'Playfair Display', serif;
+  font-size:20px;
+  font-weight:600;
+}
+
+.nav-links a {
+  margin-left:25px;
+  text-decoration:none;
+  color:#2c2c2c;
+  font-size:14px;
+  position:relative;
+}
+
+.nav-links a::after {
+  content:"";
+  position:absolute;
+  width:0;
+  height:1px;
+  background:#b8a98f;
+  left:0;
+  bottom:-4px;
+  transition:0.3s;
+}
+
+.nav-links a:hover::after {
+  width:100%;
+}
+
+/* ================= HERO ================= */
+
+header {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:0 20px;
+}
+
+.profile-img {
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:30px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+  transition:0.4s;
+}
+
+.profile-img:hover {
+  transform:scale(1.05);
+}
+
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:56px;
+  background:linear-gradient(90deg,#b8a98f,#8e7f66);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+}
+
+.subtitle {
+  font-size:18px;
+  color:#6d6a66;
+  margin-bottom:30px;
+}
+
+/* Buttons */
+
+.btn {
+  padding:14px 32px;
+  border-radius:40px;
+  text-decoration:none;
+  margin:10px;
+  display:inline-block;
+  transition:0.4s;
+}
+
+.btn-main {
+  background:linear-gradient(90deg,#b8a98f,#8e7f66);
+  color:white;
+}
+
+.btn-main:hover {
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
+
+.btn-outline {
+  border:1px solid #b8a98f;
+  color:#2c2c2c;
+}
+
+.btn-outline:hover {
+  background:#b8a98f;
+  color:white;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+  padding:120px 15%;
+  opacity:0;
+  transform:translateY(60px);
+  transition:1s;
+}
+
+section.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+h2 {
+  font-family:'Playfair Display', serif;
+  font-size:36px;
+}
+
+.divider {
+  width:60px;
+  height:2px;
+  background:#b8a98f;
+  margin:15px 0 40px 0;
+}
+
+/* ================= SKILLS ================= */
+
+.skills-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.skill-card {
+  backdrop-filter:blur(15px);
+  background:rgba(255,255,255,0.6);
+  border-radius:20px;
+  padding:30px;
+  transition:0.4s;
+}
+
+.skill-card:hover {
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 25px 50px rgba(0,0,0,0.12);
+}
+
+/* ================= PORTFOLIO WOW ================= */
+
+#portfolio {
+  text-align:center;
+}
+
+.portfolio-wrapper {
+  position:relative;
+  display:flex;
+  justify-content:center;
+  margin-top:50px;
+  perspective:1200px;
+}
+
+.portfolio-img {
+  width:100%;
+  max-width:800px;
+  border-radius:25px;
+  box-shadow:0 30px 70px rgba(0,0,0,0.25);
+  transition:transform 0.5s ease;
+}
+
+.portfolio-wrapper:hover .portfolio-img {
+  transform:rotateY(-6deg) rotateX(4deg) scale(1.03);
+}
+.live-badge {
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:linear-gradient(90deg,#ff5f6d,#ffc371);
+  color:white;
+  padding:6px 14px;
+  font-size:12px;
+  border-radius:20px;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%{box-shadow:0 0 0 0 rgba(255,95,109,0.6);}
+  70%{box-shadow:0 0 0 20px rgba(255,95,109,0);}
+  100%{box-shadow:0 0 0 0 rgba(255,95,109,0);}
+}
+footer {
+  text-align:center;
+  padding:40px;
+  opacity:0.6;
+}
+
+
+
+
+p {
+  font-family: 'Inter', sans-serif; /* основной текст */
+  font-size: 16px; /* чуть больше для удобного чтения */
+  line-height: 1.8; /* воздух между строками */
+  color: #333333; /* мягкий, не резкий черный */
+  letter-spacing: 0.3px; /* чуть больше воздуха между буквами */
+  margin-bottom: 20px;
+  transition: all 0.3s ease; /* для плавного hover эффекта */
+}
+
+/* Эффект при наведении на текст */
+p:hover {
+  color: #b8a98f; /* золотистый оттенок, совпадает с твоей палитрой */
+  transform: translateY(-2px); /* лёгкое поднятие текста */
+}
+/* Анимация появления текста при скролле */
+p {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards;
+  animation-delay: 0.2s; /* можно менять для разных абзацев */
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.wow-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.wow-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= TIMELINE LEBENSLAUF ================= */
+
+#lebenslauf {
+  padding: 120px 15%;
+  background: transparent; /* пусть градиент фона сайта будет видно */
+}
+
+#lebenslauf h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  text-align: center;
+  color: #2c2c2c;
+}
+
+#lebenslauf .divider {
+  margin: 15px auto 40px auto;
+}
+
+/* Timeline вертикальная линия */
+.timeline {
+  position: relative;
+  margin: 50px 0;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #b8a98f;
+  border-radius: 2px;
+}
+
+/* Каждый элемент timeline */
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  padding: 15px 20px 15px 50px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #2c2c2c;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Hover эффект */
+.timeline-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.75);
+}
+
+/* Точки на timeline */
+.timeline-dot {
+  position: absolute;
+  left: -8px;
+  top: 18px;
+  width: 16px;
+  height: 16px;
+  background: #b8a98f;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transition: all 0.4s ease;
+}
+
+/* Появление при скролле */
+.timeline-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+    </style>
+</head>
+<body>
+    <body>
+
+<nav>
+  <div class="nav-container">
+    <span class="logo">Bushra Khan</span>
+    <div class="nav-links">
+      <a href="#about">Über mich</a>
+       <a href="#lebenslauf">Lebenslauf</a>
+       <a href="#skills">Kenntnisse</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div>
+    <img src="https://i.postimg.cc/0y6hfc49/photo-2026-03-02-14-57-40.jpg" class="profile-img">
+    <h1>Bushra Khan</h1>
+    <p class="subtitle">Ausbildung Medienkauffrau Digital & Print</p>
+    <a href="https://docs.google.com/document/d/1pGPzDr1QBxoo-UCCTlfWjOELjAY1kOIV/export?format=pdf" class="btn btn-main">Lebenslauf herunterladen</a>
+    <a href="#portfolio" class="btn btn-outline">Mein Projekt ansehen</a>
+  </div>
+</header>
+
+<section id="about">
+  <h2>Über mich</h2>
+  <div class="divider"></div>
+  <p class="wow-text">
+    Mit großem Interesse bewerbe ich mich um einen Ausbildungsplatz als Mediengestalterin. Kreative Gestaltung, Webdesign und digitale Medien begleiten mich schon seit mehreren Jahren, und ich möchte meine Leidenschaft nun in einem professionellen Umfeld weiterentwickeln.
+Ich bin 18 Jahre alt und habe einen vielfältigen internationalen Hintergrund: Ich wurde in Usbekistan geboren, lebte anschließend auf der Krim, später in Odessa (Ukraine) und verbrachte mit 16 drei Monate in Kanada. Seit zwei Jahren lebe ich in Deutschland und besuche aktuell eine Berufsvorbereitungsintegrationsklasse, in der ich zum Ende dieses Schuljahres den Mittleren Schulabschluss anstrebe. In der Ukraine habe ich bereits das Attestat erworben, das der mittleren Reife entspricht.
+Sprachlich bin ich sehr flexibel: Ich spreche fließend Ukrainisch, Russisch, Tatarisch und Urdu sowie Englisch auf B1Niveau und Deutsch auf A2–B1Niveau. Durch meine Erfahrungen in verschiedenen Ländern habe ich gelernt, mich schnell in neue Umgebungen einzuarbeiten und mich offen auf neue Herausforderungen einzulassen.
+Besonders stark bin ich im Bereich Webdesign. Ich verfüge über sehr gute Kenntnisse in HTML und CSS sowie gute Kenntnisse in JavaScript. Eine vollständige, von mir selbst gestaltete Website finden Sie unter: miyu.de. Gestaltung, Struktur, Design und Umsetzung stammen vollständig von mir. Zusätzlich bringe ich kreative Fähigkeiten mit, zum Beispiel im Bereich Grafikdesign. Mein eigenes Logo habe ich mit Photopea selbst entworfen.
+Ich bin hochmotiviert, meine technischen und kreativen Fähigkeiten weiter auszubauen und freue mich darauf, in Ihrem Unternehmen professionelle Erfahrungen zu sammeln. Zuverlässigkeit, Lernbereitschaft und Engagement bringe ich selbstverständlich mit.
+
+  </p>
+</section>
+<section id="lebenslauf">
+  <h2>Lebenslauf</h2>
+  <div class="divider"></div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      09/2025-08/2026: Berufsintegrations- und Berufsvorbereitungsklasse an der 
+Berufsschule 1 in 83024 Rosenheim, 11.Klasse
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      09/2024-07/2025: Berufsintegrations- und Berufsvorbereitungsklasse an der 
+Berufsschule 1 in 83024 Rosenheim, 10.Klasse
+    </div>
+     <div class="timeline-item">
+      <div class="timeline-dot"></div>
+     04/06/2024: Einreise nach München in Deutschland
+    </div>
+     <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      24/03/2024-03/06/2024: Sprachaufenthalt in Winipek, Kanada
+    </div>
+     <div class="timeline-item">
+      <div class="timeline-dot"></div>
+     09/2019-06/2024: Abschluss der 11. Klasse am Odessa Lyceum 84 (Real
+schule)
+    </div>
+     <div class="timeline-item">
+      <div class="timeline-dot"></div>
+     09/2013-06/2019: 7.Klasse Ivanovskaya Sekundarschule (Grundschule und 
+Aufbauschule)
+    </div>
+  </div>
+</section>
+<section id="skills">
+  <h2>Kenntnisse & Fähigkeiten</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>Sprachen</h3>
+     Russisch<br>Ukrainisch<br>Deutsch A2–B1<br>Englisch B1<br>Urdu<br>Tatarisch
+    </div>
+      <div class="skill-card">
+      <h3>Praktikum</h3>
+      Rossman 
+    </div>
+      
+    <div class="skill-card">
+      <h3>Technik</h3>
+      HTML, CSS<br>Microsoft Office
+    </div>
+    <div class="skill-card">
+      <h3>Stärken</h3>
+      Organisation<br>Teamfähigkeit<br>Kreativität
+    </div>
+    <div class="skill-card">
+      <h3>Hobbys</h3>
+      Bücher lesen<br>Anime schauen<br>Sprachen lernen
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <h2>Mein Webprojekt</h2>
+  <div class="divider"></div>
+
+  <p>Konzeption und visuelles Design wurden eigenständig von mir entwickelt, die Umsetzung erfolgte selbstständig unter Nutzung digitaler Werkzeuge.</p> 
+    <div class="portfolio-wrapper">
+    <span class="live-badge">LIVE</span>
+    <img src="https://github.com/hanbushra2767-rgb/Ausbildung/raw/72502172ee6c0694ae418d83a14fb26289b4a34a/Screenshot_27-3-2026_15568_cdpn.io.jpeg" class="portfolio-img">
+  </div>
+
+  <div style="margin-top:40px;">
+    <a href="https://hanbushra2767-rgb.github.io/3..3/" target="_blank" class="btn btn-main">
+      Projekt live ansehen →
+    </a>
+  </div>
+</section>
+
+<section id="kontakt">
+  <h2>Kontakt</h2>
+  <div class="divider"></div>
+  <p>Email: hanbushra276@gmail.com;</p>
+  <p>Tel: +4915124148148;</p>
+   <p>Adresse: Wernher-von-Braun-Str.19;</p>
+  <p>Ort,PLZ: 83052 Bruckmühl;</p>
+</section>
+
+<footer>
+© 2026 Bushra Khan
+</footer>
+    <script>
+       
+/* Nav Shadow */
+window.addEventListener("scroll",()=>{
+  if(window.scrollY>50){
+    document.querySelector("nav").classList.add("scrolled");
+  } else {
+    document.querySelector("nav").classList.remove("scrolled");
+  }
+});
+
+/* Section Animation */
+const sections=document.querySelectorAll("section");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{threshold:0.2});
+sections.forEach(section=>observer.observe(section));
+
+/* Timeline Animation */
+const items=document.querySelectorAll(".timeline-item");
+const observer2=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:0.3});
+items.forEach(item=>observer2.observe(item));
+
+
+
+const wowTexts = document.querySelectorAll('.wow-text');
+
+const wowObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.2 });
+
+wowTexts.forEach(text => wowObserver.observe(text));
+    </script>
+</body>
+</html>
